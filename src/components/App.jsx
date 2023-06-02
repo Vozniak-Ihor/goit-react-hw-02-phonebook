@@ -1,6 +1,8 @@
 import React, { Component } from 'react';
 import { nanoid } from 'nanoid';
 import LoginForm  from './LogForm/LoginForm';
+import ContactsList from "./ContactsList/ContactsList"
+import Filter from './Filter/Filter';
 
 export class App extends Component {
   state = {
@@ -12,6 +14,7 @@ export class App extends Component {
     ],
     filter: '',
   };
+  
   handleSubmit = (values, actions) => {
     const contactId = nanoid();
     if (this.state.contacts.some(item => item.name === values.name)) {
@@ -25,33 +28,15 @@ export class App extends Component {
         number: values.phoneNumber.toString()
       }]
     }));
-    console.log(this.state.contacts);
     actions.resetForm()
   }
-  // handleSubmit = (values, actions) =>
-  // {
-  //       const contactId = nanoid()
-  //         if (this.state.contacts.some(item => item.name === values.name))
-  //           {
-  //           alert(`${values.name} is already in contacts`)
-  //           return
-  //           }  
-  //     this.setState((prevState) =>
-  //     (
-  //       {
-  //         contacts: [...prevState.contacts,
-  //         { id: contactId , name: values.name, number: values.number.toString()}]
-  //       }
-  //       )
-  //       )
-  //       console.log(this.state.contacts);
-  //       actions.resetForm()
-  // }
   
   render() {
     return (
       <>
         <LoginForm onSubmit={this.handleSubmit} contacts={ this.state.contacts}/>
+        {/* <ContactsList contacts={this.state.contacts}/> */}
+        <Filter contacts={this.state.contacts}/>
       </>
     );
   }

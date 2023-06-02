@@ -5,23 +5,17 @@ import * as yup from 'yup';
 // import { FormContainer, FormLabelName, FormInputName, FormInputTel,  FormButton, ErrorText } from "./LodForm.styled";
 
 const schema = yup.object().shape({
-  name: yup
-    .string()
-    .required("Ім'я обов'язкове"),
-  phoneNumber: yup
-    .number()
-    .min(10)
-    .required("Номер телефону обов'язковий"),
+  name: yup.string().required("Ім'я обов'язкове"),
+  phoneNumber: yup.string().matches(/^(\+?3?8)?(0\d{9})$/, '+380XXXXXXXXX').required("Номер телефону обов'язковий"),
 });
 
 const initialValues = {
   name: '',
   phoneNumber: '',
 };
-class LoginForm extends Component{
 
-render(){
-
+class LoginForm extends Component {
+  render() {
     return (
       <Formik
         initialValues={initialValues}
@@ -34,7 +28,7 @@ render(){
             <Field type="text" name="name" />
             <ErrorMessage name="name" component="div" />
           </label>
-  
+
           <label>
             Number
             <Field type="tel" name="phoneNumber" />
@@ -44,12 +38,13 @@ render(){
         </Form>
       </Formik>
     );
+  }
 }
-};
 
-export default LoginForm
+export default LoginForm;
 
-LoginForm.propTypes = {  onSubmit: PropTypes.func.isRequired,
+LoginForm.propTypes = {
+  onSubmit: PropTypes.func.isRequired,
   initialValues: PropTypes.exact({
     name: PropTypes.string.isRequired,
     phoneNumber: PropTypes.string.isRequired,
