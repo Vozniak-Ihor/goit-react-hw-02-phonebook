@@ -2,7 +2,6 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
-// import { FormContainer, FormLabelName, FormInputName, FormInputTel,  FormButton, ErrorText } from "./LodForm.styled";
 
 const schema = yup.object().shape({
   name: yup.string().required("Ім'я обов'язкове"),
