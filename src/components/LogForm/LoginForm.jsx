@@ -2,10 +2,17 @@ import PropTypes from 'prop-types';
 import React, { Component } from 'react';
 import { Formik, Form, Field, ErrorMessage } from 'formik';
 import * as yup from 'yup';
+import css from './LoginForm.module.css';
 
 const schema = yup.object().shape({
   name: yup.string().required("Ім'я обов'язкове"),
-  phoneNumber: yup.string().matches(/^(\+?3?8)?(0\d{9})$/, '+380XXXXXXXXX').required("Номер телефону обов'язковий"),
+  phoneNumber: yup
+    .string()
+    .matches(
+      /^(\+?3?8)?(0\d{9})$/,
+      'The number should look like this: +380XXXXXXXXX'
+    )
+    .required("Номер телефону обов'язковий"),
 });
 
 const initialValues = {
@@ -21,19 +28,19 @@ class LoginForm extends Component {
         onSubmit={this.props.onSubmit}
         validationSchema={schema}
       >
-        <Form autoComplete="off">
+        <Form className={css.addContactForm} autoComplete="off">
           <label>
             Name
-            <Field type="text" name="name" />
-            <ErrorMessage name="name" component="div" />
+            <Field className={css.contactInput} type="text" name="name" />
+            <ErrorMessage  name="name" component="div" />
           </label>
 
           <label>
             Number
-            <Field type="tel" name="phoneNumber" />
+            <Field className={css.contactInput} type="tel" name="phoneNumber" />
             <ErrorMessage name="phoneNumber" component="div" />
           </label>
-          <button type="submit">Add contact</button>
+          <button className={css.submitButton} type="submit">Add contact</button>
         </Form>
       </Formik>
     );

@@ -1,15 +1,18 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import css from './ContactsList.module.css'
+
 class ContactsList extends Component {
+  state = {}
   render() {
     return this.props.filter().map(({ id, name, number }) => {
       return (
-        <ul key={id}>
-          <li>
-            <p>
+        <ul className={css.contactList} key={id}>
+          <li className={css.contactItem}>
+            <p className={css.contactDetails}>
               {name}: {number}
             </p>
-            <button
+            <button className={css.deleteButton}
               type="button"
               onClick={() => {
                 this.props.onDeleteContact(id);

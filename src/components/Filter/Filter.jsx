@@ -1,25 +1,28 @@
-import React, { Component } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
+import css from './Filter.module.css';
 
-class Filter extends Component {
-  render() {
-    return (
-      <>
-        <form>
-          <h2 htmlFor="findContacts">Find contacts by name</h2>
-          <input
-            type="text"
-            id="findContacts"
-            onChange={this.props.onInputChange}
-          />
-        </form>
-      </>
-    );
-  }
-}
+const Filter = (props) => {
+  const { onInputChange } = props;
 
-export default Filter;
+  return (
+    <form className={css.searchContactForm}>
+      <h2 className={css.searchLabel} htmlFor="findContacts">
+        Find contacts by name
+      </h2>
+      <input
+        className={css.searchInput}
+        type="text"
+        id="findContacts"
+        onChange={onInputChange}
+      />
+    </form>
+  );
+};
 
 Filter.propTypes = {
   onInputChange: PropTypes.func.isRequired,
 };
+
+export default Filter;
+
